@@ -21,6 +21,7 @@ The framework must stay a **delivery rail, not a restrictive guard**: flexible, 
 | **1. The loop** | Plan → build → verify → record | Rework, stalling, wrong turns | ✅ `BUILD_STANDARD.md` |
 | **2. Reusable starts** | A library of recurring problems already solved | The blank page — start at step 5, not step 0 | Backlog |
 | **3. Compounding memory** | Lessons that outlive the project and feed the next | Solving the same problem twice | Backlog — **highest interest** |
+| **4. The delivery rail** | Publishing a capability as a skill callable from any platform or device | Knowledge stranded on one machine | Working example exists; not captured as a pattern |
 
 Part 1 makes a single project run well. Parts 2 and 3 are what make project #7 cheaper than project #1.
 
@@ -70,6 +71,75 @@ a card format in the abstract and hoping real lessons happen to fit it.
 
 That inverts the obvious order — and it means the priority can be started immediately,
 with one file and one habit, without committing to any of Part 2's design.
+
+---
+
+## Part 4 — The Delivery Rail
+
+*Publish a capability as a cross-platform skill.*
+
+**Why this is not just another pattern.** Parts 2 and 3 produce knowledge. Knowledge sitting
+in a folder on one machine is a private notebook. This is what ships it — to every device,
+every AI, callable by name, staying current on its own.
+
+The sequence is: **Part 3 produces it → Part 2 organises it → Part 4 delivers it.**
+
+This repository is already a working instance of the pattern. Nothing here needs inventing;
+it needs capturing.
+
+### The seven steps
+
+| Step | What it does | Working example |
+| --- | --- | --- |
+| 1. Canonical source | One file is truth; every other copy is derived | `BUILD_STANDARD.md` |
+| 2. Skill wrapper | `SKILL.md` — the `description` is what makes it findable | `skill/unified-build-standard/` |
+| 3. Package per platform | Anthropic ZIP, OpenAI plugin manifest | `scripts/package_skill.py` |
+| 4. Install by symlink | One `git pull` updates every local install at once | `~/.claude/skills`, `~/.agents/skills` |
+| 5. Auto-sync | Scheduled fast-forward pull with three safety rules | launchd on macOS, systemd on Linux |
+| 6. Verify | Drift, frontmatter, manifest, ZIP structure, secrets, live URL | `package_skill.py --check` |
+| 7. Document install paths | Per-platform instructions | `anthropic/README.md`, `openai/README.md` |
+
+### What varies, and what does not
+
+Only four things change between uses:
+
+- the document or capability being published
+- the skill's name and description
+- which platforms are wanted
+- public or private
+
+**Everything else is identical.** That reuse ratio is what makes this worth templating —
+and it is why the seven steps above are worth writing down before the details fade.
+
+### Three levels of ambition
+
+| Level | What it is | Effort |
+| --- | --- | --- |
+| **1. A pattern card** | Written steps plus pointers to the working examples above | ~1 hour |
+| **2. A template repo** | "Use this template" → rename → drop the document in → run the script | ~half a day |
+| **3. A skill that publishes skills** | `/publish-skill` — creates the repo, packages, installs, syncs, verifies | ~a day |
+
+**Recommendation: Level 1 now; Level 2 or 3 only after doing this a second time.**
+
+What to parameterise is learned by doing something twice. Building a generator at n=1 risks
+templating the accidents of this particular project — things that happen to be true for a
+511-line Markdown document and may not hold for whatever gets published next. §8 of the
+standard applies: evidence over assumptions, and no speculative scope.
+
+### Known limitation — write this on the card
+
+"Callable from any platform and device" carries an asterisk, and it should be recorded up
+front rather than rediscovered later:
+
+- **Machines** — fully automatic. Clone, symlink, sync. Change the source and every local
+  install follows.
+- **Web and phone** — manual. There is no API for uploading a skill to a Claude or ChatGPT
+  account; it is a browser upload. Change the source and the ZIP must be re-uploaded by hand.
+
+So the failure mode to design against is: **three installs update themselves, two do not, and
+the two that do not will quietly run an old version until someone remembers.** A `publish`
+command that repackages and then reminds about the two manual uploads would remove most of
+that risk without pretending the uploads can be automated.
 
 ---
 
@@ -146,10 +216,10 @@ Start with Part 3, since that is the priority — and start it small.
 every project, spend five minutes writing down what will still be true next time. Nothing
 more structured than that yet. No card format, no library, no schema to design.
 
-**2. Harvest this project as the first entry.** Publishing a canonical document as a skill
-across platforms — canonical source, packaging, install, verification, auto-sync — is itself
-a repeatable shape that was never captured. It is a real, finished project sitting right
-there, which makes it a free first test.
+**2. Harvest this project as the first entry.** The shape it followed is written up as
+[Part 4 — The Delivery Rail](#part-4--the-delivery-rail) above. That harvest and Part 4's
+Level 1 are the same hour of work: a real, finished project sitting right there, which makes
+it a free first test of whether the habit produces anything useful.
 
 **3. Let the structure emerge.** After three or four harvests, look at what accumulated.
 The repeated shapes in that file are the first pattern cards, and their real headings will
