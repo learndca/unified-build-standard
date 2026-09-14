@@ -13,6 +13,11 @@ It exists to resolve difficult reasoning at the right time, minimise rediscovery
 
 The raw link is the one to paste into a system prompt, a project instruction file, or any agent that can fetch a URL.
 
+## Where this is going
+
+Part 1 — the planning and execution loop — is done. Parts 2 and 3, which make each
+project cost less than the last, are captured in [NEXT_STEPS.md](NEXT_STEPS.md).
+
 ## What it does
 
 | Part | Covers |
