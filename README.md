@@ -18,6 +18,9 @@ The raw link is the one to paste into a system prompt, a project instruction fil
 Part 1 — the planning and execution loop — is done. Parts 2 and 3, which make each
 project cost less than the last, are captured in [NEXT_STEPS.md](NEXT_STEPS.md).
 
+The priority there is **Part 3, compounding memory**: capturing what a finished project
+taught you, so the next one starts ahead rather than from scratch.
+
 ## What it does
 
 | Part | Covers |

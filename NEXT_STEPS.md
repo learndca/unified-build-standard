@@ -20,9 +20,20 @@ The framework must stay a **delivery rail, not a restrictive guard**: flexible, 
 | --- | --- | --- | --- |
 | **1. The loop** | Plan → build → verify → record | Rework, stalling, wrong turns | ✅ `BUILD_STANDARD.md` |
 | **2. Reusable starts** | A library of recurring problems already solved | The blank page — start at step 5, not step 0 | Backlog |
-| **3. Compounding memory** | Lessons that outlive the project and feed the next | Solving the same problem twice | Backlog |
+| **3. Compounding memory** | Lessons that outlive the project and feed the next | Solving the same problem twice | Backlog — **highest interest** |
 
 Part 1 makes a single project run well. Parts 2 and 3 are what make project #7 cheaper than project #1.
+
+> ## Priority
+>
+> **Part 3 — compounding memory — is the part of most interest, and the part to get right first.**
+>
+> Part 2 is the more obvious time-saver, but a pattern library is only ever as good as what
+> gets deposited into it. The mechanism that captures a lesson while it is still fresh, and
+> makes it available to the next project, is the thing worth solving. Without it there is
+> nothing to build a library out of.
+>
+> Recorded 14 September 2026 as the owner's stated priority.
 
 **The gap today:** the standard optimises brilliantly *within* one project and has almost nothing that compounds *across* projects. §21 preserves discoveries, §23 keeps a `# Learnings` section, §8 reuses established patterns — but every one of those is scoped to the project it came from. When a repo goes quiet, the learning goes with it.
 
@@ -41,6 +52,8 @@ Think **cooking techniques, not recipes**. A recipe makes one dish. Knowing how 
 
 ## Part 3 — Compounding Memory
 
+**This is the priority. Everything else in this file is downstream of it.**
+
 - **What** — A five-minute step at the end of every project: *what did we learn that will still be true next time?*
 - **Why** — Without it, Part 2 is a library nobody adds books to.
 - **Who** — Done while the project is still fresh, at completion.
@@ -48,7 +61,15 @@ Think **cooking techniques, not recipes**. A recipe makes one dish. Knowing how 
 - **Where** — Straight into `patterns/`, as a new card or an edit to an existing one.
 - **How** — Three valid outcomes: write a new card, improve an existing card, or decide nothing is worth keeping.
 
-**Together:** Part 2 without Part 3 goes stale. Part 3 without Part 2 has nowhere to put anything.
+**Together:** Part 2 without Part 3 goes stale — a library nobody ever adds to.
+
+**But Part 3 does not have to wait for Part 2.** Harvested lessons can land in a single
+flat file long before there is any structured library. The library is arguably better grown
+that way: let the pattern cards emerge from what actually accumulates, rather than designing
+a card format in the abstract and hoping real lessons happen to fit it.
+
+That inverts the obvious order — and it means the priority can be started immediately,
+with one file and one habit, without committing to any of Part 2's design.
 
 ---
 
@@ -119,6 +140,21 @@ Skills read references on demand, so fifty patterns do not make any individual p
 
 ## Suggested first step
 
-**Harvest this project.** Publishing a canonical document as a skill across platforms — canonical source, packaging, install, verification, auto-sync — is itself a repeatable shape that was never captured.
+Start with Part 3, since that is the priority — and start it small.
 
-Extract two or three draft pattern cards from it and test them against a genuinely different project. If they would have saved time, the loop is validated and the library has its first entries. If they are too thin or too specific, that is learned cheaply, before committing to a format.
+**1. Create one file and one habit.** A single `LEARNINGS.md` and a rule: at the end of
+every project, spend five minutes writing down what will still be true next time. Nothing
+more structured than that yet. No card format, no library, no schema to design.
+
+**2. Harvest this project as the first entry.** Publishing a canonical document as a skill
+across platforms — canonical source, packaging, install, verification, auto-sync — is itself
+a repeatable shape that was never captured. It is a real, finished project sitting right
+there, which makes it a free first test.
+
+**3. Let the structure emerge.** After three or four harvests, look at what accumulated.
+The repeated shapes in that file are the first pattern cards, and their real headings will
+be obvious from the entries rather than guessed at in advance. That is when Part 2 starts,
+and it starts with evidence.
+
+The open questions below about card format and referencing do not need answering to begin.
+They answer themselves once there is something to look at.
