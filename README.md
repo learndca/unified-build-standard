@@ -107,6 +107,23 @@ Start a new session, check `/skills`, invoke `$unified-build-standard`. For Chat
 
 Per-repository install: copy the skill folder into `.agents/skills/`.
 
+## Companion skill: away mode
+
+[`skill/away/`](skill/away/) runs the standard unattended while you are away:
+a fixed window (default **8 hours**), one verified improvement every
+**30 minutes**, all times in **GMT**, ending with a report table of step ·
+change · evidence · commit. It loads `unified-build-standard` first and adds
+only the timing, the away-specific authorisation (plan, then execute without
+waiting; no push unless you say `push`) and the report. One shared file serves
+Claude Code and Codex.
+
+```bash
+ln -s "$PWD/skill/away" ~/.claude/skills/away     # Claude Code: /away
+ln -s "$PWD/skill/away" ~/.agents/skills/away     # Codex: $away
+```
+
+Examples: `/away` · `/away speed and mobile layout` · `/away 4h fix the failing tests` · `/away push`.
+
 ## Invocation examples
 
 Planning only — the phase gate applies:
@@ -174,6 +191,7 @@ unified-build-standard/
 ├── README.md
 ├── BUILD_STANDARD.md              # canonical
 ├── skill/unified-build-standard/  # portable skill (symlink target)
+├── skill/away/                    # away-mode companion skill (symlink target)
 ├── anthropic/README.md
 ├── openai/
 │   ├── README.md
