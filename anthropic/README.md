@@ -19,6 +19,11 @@ unified-build-standard/
 
 The skill is now attached to your account, so it is available on web, desktop and mobile without any further per-device setup.
 
+### Companion skill: away mode
+
+Upload `dist/anthropic/away.zip` the same way and enable **away**. It loads the
+Unified Build Standard itself, so keep both enabled. Invoke with `/away`.
+
 ## 2. Invoke it
 
 Explicitly:

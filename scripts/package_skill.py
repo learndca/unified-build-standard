@@ -30,17 +30,24 @@ PORTABLE_SKILL = ROOT / "skill" / "unified-build-standard"
 OPENAI_SKILL = ROOT / "openai" / "plugin" / "skills" / "unified-build-standard"
 PLUGIN_DIR = ROOT / "openai" / "plugin"
 
+# Companion skill: away mode. Canonical in skill/away/, shipped as its own
+# Anthropic ZIP and bundled inside the same OpenAI personal plugin.
+AWAY_SKILL = ROOT / "skill" / "away"
+OPENAI_AWAY_SKILL = PLUGIN_DIR / "skills" / "away"
+
 # (canonical source, derived destination)
 SYNC_PAIRS = [
     (CANONICAL_DOC, PORTABLE_SKILL / "references" / "BUILD_STANDARD.md"),
     (CANONICAL_DOC, OPENAI_SKILL / "references" / "BUILD_STANDARD.md"),
     (PORTABLE_SKILL / "SKILL.md", OPENAI_SKILL / "SKILL.md"),
+    (AWAY_SKILL / "SKILL.md", OPENAI_AWAY_SKILL / "SKILL.md"),
     # Codex reads .codex-plugin/plugin.json; the root copy is the portable
     # manifest described in the current OpenAI packaging docs. Same content.
     (PLUGIN_DIR / ".codex-plugin" / "plugin.json", PLUGIN_DIR / "plugin.json"),
 ]
 
 ANTHROPIC_ZIP = ROOT / "dist" / "anthropic" / "unified-build-standard.zip"
+ANTHROPIC_AWAY_ZIP = ROOT / "dist" / "anthropic" / "away.zip"
 OPENAI_ZIP = ROOT / "dist" / "openai" / "unified-build-standard-plugin.zip"
 
 # Fixed timestamp so repeated builds produce byte-identical archives.
@@ -199,6 +206,14 @@ def validate() -> int:
         else:
             print("ok      reference present {}".format(rel(reference)))
 
+    for skill_dir in (AWAY_SKILL, OPENAI_AWAY_SKILL):
+        skill_md = skill_dir / "SKILL.md"
+        if not skill_md.exists():
+            print("MISSING: {}".format(rel(skill_md)), file=sys.stderr)
+            errors += 1
+            continue
+        errors += validate_frontmatter(skill_md)
+
     errors += validate_manifest(PLUGIN_DIR / ".codex-plugin" / "plugin.json")
     return errors
 
@@ -225,6 +240,7 @@ def collect(base: Path, prefix: str):
 
 def build_zips() -> None:
     write_zip(ANTHROPIC_ZIP, collect(PORTABLE_SKILL, "unified-build-standard"))
+    write_zip(ANTHROPIC_AWAY_ZIP, collect(AWAY_SKILL, "away"))
     write_zip(OPENAI_ZIP, collect(PLUGIN_DIR, "unified-build-standard"))
 
 

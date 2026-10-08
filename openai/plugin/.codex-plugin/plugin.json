@@ -1,7 +1,7 @@
 {
   "name": "unified-build-standard",
-  "version": "2.0.0",
-  "description": "Apply the Unified Build Standard to plan, execute, verify, resume, and complete technical work.",
+  "version": "2.1.0",
+  "description": "Apply the Unified Build Standard to plan, execute, verify, resume, and complete technical work, and run it unattended with away mode.",
   "author": {
     "name": "learndca",
     "email": "learndca@users.noreply.github.com",
@@ -18,13 +18,14 @@
     "verification",
     "code-review",
     "migration",
-    "automation"
+    "automation",
+    "away-mode"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Unified Build Standard",
     "shortDescription": "Plan intelligently, execute economically, verify objectively",
-    "longDescription": "Applies the Unified Build Standard: right-size the process to the work, plan as one master table with stable step IDs and explicit executor tiers, stop at the phase gate until execution is authorised, verify with the cheapest reliable evidence, and keep durable plan and progress records so any session can resume.",
+    "longDescription": "Applies the Unified Build Standard: right-size the process to the work, plan as one master table with stable step IDs and explicit executor tiers, stop at the phase gate until execution is authorised, verify with the cheapest reliable evidence, and keep durable plan and progress records so any session can resume. Includes away mode: an unattended window (default 8 hours, GMT) with one verified improvement every 30 minutes and a report on return.",
     "developerName": "learndca",
     "category": "Developer Tools",
     "capabilities": [

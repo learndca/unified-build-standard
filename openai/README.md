@@ -73,10 +73,13 @@ In Codex CLI you can browse and install plugins from configured marketplaces wit
 /plugins
 ```
 
+The plugin also bundles the **away** companion skill (`skills/away/`), so one
+upload installs both. After upgrading from 2.0.0, re-upload the ZIP.
+
 ### Invoke
 
 - ChatGPT: type `@` and pick **Unified Build Standard**, or describe the task and let ChatGPT choose it.
-- Codex CLI: `$unified-build-standard`, or describe the task.
+- Codex CLI: `$unified-build-standard`, or describe the task. Away mode: `$away`.
 
 Both explicit and implicit invocation are supported; nothing in the manifest restricts selection.
 
