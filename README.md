@@ -6,6 +6,10 @@ It exists to resolve difficult reasoning at the right time, minimise rediscovery
 
 > **Plan intelligently. Execute economically. Verify objectively. Learn quickly. Escalate selectively.**
 
+## Version 3
+
+This branch carries version 3 of the standard as a self-contained skill: goal-driven building with a plain-English plan, a run log and per-step work orders. See [V3.md](V3.md).
+
 ## Read the standard
 
 - **Rendered:** [BUILD_STANDARD.md](https://github.com/learndca/unified-build-standard/blob/main/BUILD_STANDARD.md)

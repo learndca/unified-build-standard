@@ -14,6 +14,7 @@ Standard library only. Compatible with Python 3.9+.
 """
 
 import argparse
+import os
 import filecmp
 import json
 import shutil
@@ -35,6 +36,10 @@ PLUGIN_DIR = ROOT / "openai" / "plugin"
 AWAY_SKILL = ROOT / "skill" / "away"
 OPENAI_AWAY_SKILL = PLUGIN_DIR / "skills" / "away"
 
+# Version 3 trial. Self-contained skill, canonical in skill/build-standard-v3/,
+# shipped as its own Anthropic ZIP. Not yet part of the OpenAI plugin.
+V3_SKILL = ROOT / "skill" / "build-standard-v3"
+
 # (canonical source, derived destination)
 SYNC_PAIRS = [
     (CANONICAL_DOC, PORTABLE_SKILL / "references" / "BUILD_STANDARD.md"),
@@ -48,6 +53,7 @@ SYNC_PAIRS = [
 
 ANTHROPIC_ZIP = ROOT / "dist" / "anthropic" / "unified-build-standard.zip"
 ANTHROPIC_AWAY_ZIP = ROOT / "dist" / "anthropic" / "away.zip"
+ANTHROPIC_V3_ZIP = ROOT / "dist" / "anthropic" / "build-standard-v3.zip"
 OPENAI_ZIP = ROOT / "dist" / "openai" / "unified-build-standard-plugin.zip"
 
 # Fixed timestamp so repeated builds produce byte-identical archives.
@@ -206,7 +212,7 @@ def validate() -> int:
         else:
             print("ok      reference present {}".format(rel(reference)))
 
-    for skill_dir in (AWAY_SKILL, OPENAI_AWAY_SKILL):
+    for skill_dir in (AWAY_SKILL, OPENAI_AWAY_SKILL, V3_SKILL):
         skill_md = skill_dir / "SKILL.md"
         if not skill_md.exists():
             print("MISSING: {}".format(rel(skill_md)), file=sys.stderr)
@@ -225,7 +231,9 @@ def write_zip(target: Path, entries) -> None:
         for arcname, source in sorted(entries):
             info = zipfile.ZipInfo(arcname, date_time=ZIP_DATE_TIME)
             info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = 0o644 << 16
+            # Keep scripts runnable after unzipping.
+            mode = 0o755 if os.access(source, os.X_OK) else 0o644
+            info.external_attr = mode << 16
             archive.writestr(info, source.read_bytes())
     print("built   {}".format(rel(target)))
 
@@ -241,6 +249,7 @@ def collect(base: Path, prefix: str):
 def build_zips() -> None:
     write_zip(ANTHROPIC_ZIP, collect(PORTABLE_SKILL, "unified-build-standard"))
     write_zip(ANTHROPIC_AWAY_ZIP, collect(AWAY_SKILL, "away"))
+    write_zip(ANTHROPIC_V3_ZIP, collect(V3_SKILL, "build-standard-v3"))
     write_zip(OPENAI_ZIP, collect(PLUGIN_DIR, "unified-build-standard"))
 
 
