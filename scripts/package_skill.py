@@ -37,9 +37,11 @@ AWAY_SKILL = ROOT / "skill" / "away"
 OPENAI_AWAY_SKILL = PLUGIN_DIR / "skills" / "away"
 
 # Version 3 trial. Self-contained skill, canonical in skill/build-standard-v3/,
-# shipped as its own Anthropic ZIP and bundled inside the OpenAI personal plugin.
+# shipped as its own Anthropic ZIP and as its own OpenAI personal plugin, so
+# installing it never replaces the version 2 plugin.
 V3_SKILL = ROOT / "skill" / "build-standard-v3"
-OPENAI_V3_SKILL = PLUGIN_DIR / "skills" / "build-standard-v3"
+PLUGIN_V3_DIR = ROOT / "openai" / "plugin-v3"
+OPENAI_V3_SKILL = PLUGIN_V3_DIR / "skills" / "build-standard-v3"
 
 # (canonical source, derived destination)
 SYNC_PAIRS = [
@@ -52,7 +54,10 @@ SYNC_PAIRS = [
     (PLUGIN_DIR / ".codex-plugin" / "plugin.json", PLUGIN_DIR / "plugin.json"),
 ]
 
-# Version 3 has several files: mirror every one of them into the plugin.
+# Version 3 has several files: mirror every one of them into its plugin.
+SYNC_PAIRS += [
+    (PLUGIN_V3_DIR / ".codex-plugin" / "plugin.json", PLUGIN_V3_DIR / "plugin.json"),
+]
 SYNC_PAIRS += [
     (path, OPENAI_V3_SKILL / path.relative_to(V3_SKILL))
     for path in sorted(V3_SKILL.rglob("*"))
@@ -63,6 +68,7 @@ ANTHROPIC_ZIP = ROOT / "dist" / "anthropic" / "unified-build-standard.zip"
 ANTHROPIC_AWAY_ZIP = ROOT / "dist" / "anthropic" / "away.zip"
 ANTHROPIC_V3_ZIP = ROOT / "dist" / "anthropic" / "build-standard-v3.zip"
 OPENAI_ZIP = ROOT / "dist" / "openai" / "unified-build-standard-plugin.zip"
+OPENAI_V3_ZIP = ROOT / "dist" / "openai" / "build-standard-v3-plugin.zip"
 
 # Fixed timestamp so repeated builds produce byte-identical archives.
 ZIP_DATE_TIME = (2026, 9, 1, 0, 0, 0)
@@ -230,6 +236,7 @@ def validate() -> int:
         errors += validate_frontmatter(skill_md)
 
     errors += validate_manifest(PLUGIN_DIR / ".codex-plugin" / "plugin.json")
+    errors += validate_manifest(PLUGIN_V3_DIR / ".codex-plugin" / "plugin.json")
     return errors
 
 
@@ -260,6 +267,7 @@ def build_zips() -> None:
     write_zip(ANTHROPIC_AWAY_ZIP, collect(AWAY_SKILL, "away"))
     write_zip(ANTHROPIC_V3_ZIP, collect(V3_SKILL, "build-standard-v3"))
     write_zip(OPENAI_ZIP, collect(PLUGIN_DIR, "unified-build-standard"))
+    write_zip(OPENAI_V3_ZIP, collect(PLUGIN_V3_DIR, "build-standard-v3"))
 
 
 def main() -> int:

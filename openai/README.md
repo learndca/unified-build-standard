@@ -78,9 +78,14 @@ In Codex CLI you can browse and install plugins from configured marketplaces wit
 The plugin also bundles the **away** companion skill (`skills/away/`), so one
 upload installs both. After upgrading from 2.0.0, re-upload the ZIP.
 
-The plugin also bundles **Build Standard v3** (`skills/build-standard-v3/`) from
-version 2.2.0: goal-driven building with a plain-English plan, a run log and
-per-step work orders. See [V3.md](../V3.md). After upgrading, re-upload the ZIP.
+### Version 3 is a separate plugin
+
+Build Standard v3 ships as its own personal plugin,
+[`dist/openai/build-standard-v3-plugin.zip`](../dist/openai/build-standard-v3-plugin.zip)
+(source in `openai/plugin-v3/`). ChatGPT will not replace an existing plugin of
+the same name, so a separate plugin lets v3 be installed beside version 2
+without touching it. Install it the same way: **Plugins → Add → Upload plugin
+archive**. See [V3.md](../V3.md).
 
 ### Invoke
 

@@ -1,0 +1,41 @@
+{
+  "name": "build-standard-v3",
+  "version": "3.0.0",
+  "description": "Build Standard v3: goal-driven building with a plain-English plan, a run log and per-step work orders kept in a build-plan folder.",
+  "author": {
+    "name": "learndca",
+    "email": "learndca@users.noreply.github.com",
+    "url": "https://github.com/learndca"
+  },
+  "homepage": "https://github.com/learndca/unified-build-standard/tree/v3",
+  "repository": "https://github.com/learndca/unified-build-standard",
+  "license": "MIT",
+  "keywords": [
+    "planning",
+    "execution",
+    "engineering-standard",
+    "workflow",
+    "verification",
+    "goal-driven",
+    "automation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Build Standard v3",
+    "shortDescription": "Set a measurable goal, then build to it",
+    "longDescription": "Version 3 of the Unified Build Standard. Start from a measurable goal with limits and stop conditions, choose a Gated run (report after each phase) or an Unattended run (work until the goal is met), and keep a plain-English plan, a run log and per-step work orders in a build-plan folder so a cheaper model can execute what a stronger model planned.",
+    "developerName": "learndca",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive"
+    ],
+    "websiteURL": "https://github.com/learndca/unified-build-standard/tree/v3",
+    "defaultPrompt": [
+      "Use build standard v3. My goal is ...",
+      "Use build standard v3 in Gated mode.",
+      "Use build standard v3 and run unattended."
+    ],
+    "brandColor": "#1F6FEB",
+    "screenshots": []
+  }
+}
