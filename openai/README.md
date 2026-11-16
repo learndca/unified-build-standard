@@ -27,6 +27,8 @@ rm -rf ~/.agents/skills/unified-build-standard
 cp -R /path/to/unified-build-standard/skill/unified-build-standard ~/.agents/skills/
 ```
 
+For version 3, link `skill/build-standard-v3` the same way.
+
 Start a **new** Codex session, then confirm:
 
 ```
@@ -76,10 +78,14 @@ In Codex CLI you can browse and install plugins from configured marketplaces wit
 The plugin also bundles the **away** companion skill (`skills/away/`), so one
 upload installs both. After upgrading from 2.0.0, re-upload the ZIP.
 
+The plugin also bundles **Build Standard v3** (`skills/build-standard-v3/`) from
+version 2.2.0: goal-driven building with a plain-English plan, a run log and
+per-step work orders. See [V3.md](../V3.md). After upgrading, re-upload the ZIP.
+
 ### Invoke
 
 - ChatGPT: type `@` and pick **Unified Build Standard**, or describe the task and let ChatGPT choose it.
-- Codex CLI: `$unified-build-standard`, or describe the task. Away mode: `$away`.
+- Codex CLI: `$unified-build-standard`, or describe the task. Away mode: `$away`. Version 3: `$build-standard-v3`.
 
 Both explicit and implicit invocation are supported; nothing in the manifest restricts selection.
 

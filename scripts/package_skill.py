@@ -37,8 +37,9 @@ AWAY_SKILL = ROOT / "skill" / "away"
 OPENAI_AWAY_SKILL = PLUGIN_DIR / "skills" / "away"
 
 # Version 3 trial. Self-contained skill, canonical in skill/build-standard-v3/,
-# shipped as its own Anthropic ZIP. Not yet part of the OpenAI plugin.
+# shipped as its own Anthropic ZIP and bundled inside the OpenAI personal plugin.
 V3_SKILL = ROOT / "skill" / "build-standard-v3"
+OPENAI_V3_SKILL = PLUGIN_DIR / "skills" / "build-standard-v3"
 
 # (canonical source, derived destination)
 SYNC_PAIRS = [
@@ -49,6 +50,13 @@ SYNC_PAIRS = [
     # Codex reads .codex-plugin/plugin.json; the root copy is the portable
     # manifest described in the current OpenAI packaging docs. Same content.
     (PLUGIN_DIR / ".codex-plugin" / "plugin.json", PLUGIN_DIR / "plugin.json"),
+]
+
+# Version 3 has several files: mirror every one of them into the plugin.
+SYNC_PAIRS += [
+    (path, OPENAI_V3_SKILL / path.relative_to(V3_SKILL))
+    for path in sorted(V3_SKILL.rglob("*"))
+    if path.is_file() and path.name != ".DS_Store"
 ]
 
 ANTHROPIC_ZIP = ROOT / "dist" / "anthropic" / "unified-build-standard.zip"
@@ -83,6 +91,7 @@ def sync(check_only: bool) -> int:
         else:
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, dest)
+            shutil.copymode(source, dest)
             print("synced  {}  <- {}".format(rel(dest), rel(source)))
     return drift
 
@@ -212,7 +221,7 @@ def validate() -> int:
         else:
             print("ok      reference present {}".format(rel(reference)))
 
-    for skill_dir in (AWAY_SKILL, OPENAI_AWAY_SKILL, V3_SKILL):
+    for skill_dir in (AWAY_SKILL, OPENAI_AWAY_SKILL, V3_SKILL, OPENAI_V3_SKILL):
         skill_md = skill_dir / "SKILL.md"
         if not skill_md.exists():
             print("MISSING: {}".format(rel(skill_md)), file=sys.stderr)
